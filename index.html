@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Subha! ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffdeef 0%, #fff3e3 50%, #e8f5ff 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Background Elements */
+        .decorations {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .balloon {
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            background: rgba(216, 27, 96, 0.2);
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            animation: floatUp 8s infinite linear;
+            bottom: -50px;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-110vh) translateX(50px) rotate(20deg); opacity: 0; }
+        }
+
+        .page {
+            display: none;
+            height: 100vh;
+            width: 100vw;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            padding: 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .active-page {
+            display: flex;
+        }
+
+        h1, h2 {
+            font-family: 'Caveat', cursive;
+            color: #d81b60;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+        h1 { font-size: 42px; }
+        h2 { font-size: 28px; color: #7b1fa2; }
+
+        /* Glassmorphism Card Style Container */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(216, 27, 96, 0.08);
+            max-width: 90%;
+        }
+
+        /* Slide 1: Premium Letter Envelope */
+        .envelope-wrapper {
+            perspective: 1000px;
+        }
+        .envelope {
+            background: linear-gradient(135deg, #ff7b93, #ff5274);
+            width: 280px;
+            height: 180px;
+            position: relative;
+            cursor: pointer;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(216,27,96,0.25);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+        .envelope:hover { 
+            transform: translateY(-5px) scale(1.02); 
+            box-shadow: 0 20px 40px rgba(216,27,96,0.35);
+        }
+        .envelope::after {
+            content: "❤️";
+            position: absolute;
+            font-size: 30px;
+            background: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            bottom: -20px;
+        }
+        .envelope-text { font-family: 'Caveat', cursive; font-size: 26px; color: white; letter-spacing: 1px; }
+
+        /* Slide 2: Beautiful Calendar Layout */
+        .calendar-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 25px;
+            align-items: center;
+            width: 100%;
+        }
+        .calendar {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            width: 280px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .grid div { padding: 6px; color: #666; }
+        .grid .day-header { font-weight: 600; color: #333; }
+        .day { border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 500;}
+        .highlight { 
+            background: linear-gradient(135deg, #d81b60, #ff4081); 
+            color: white !important; 
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(216, 27, 96, 0.4);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .calendar-photo img { 
+            width: 240px; 
+            height: 200px;
+            object-fit: cover;
+            border-radius: 20px; 
+            border: 6px solid white; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        /* Slide 3: Sleek 3D Cake Design */
+        .cake-container {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin: 10px auto;
+        }
+        .cake-tier {
+            background: linear-gradient(to right, #f48fb1, #f06292);
+            width: 180px;
+            height: 65px;
+            border-radius: 12px 12px 0 0;
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            box-shadow: inset 0 5px 0 rgba(255,255,255,0.4), 0 6px 12px rgba(0,0,0,0.08);
+        }
+        .cake-tier-top {
+            background: linear-gradient(to right, #f8bbd0, #f48fb1);
+            width: 130px;
+            height: 55px;
+            border-radius: 12px 12px 0 0;
+            position: absolute;
+            bottom: 65px;
+            left: 45px;
+            box-shadow: inset 0 5px 0 rgba(255,255,255,0.5), 0 4px 8px rgba(0,0,0,0.05);
+        }
+        .frosting {
+            background: #ffffff;
+            width: 100%;
+            height: 14px;
+            border-radius: 12px 12px 0 0;
+            position: absolute;
+            top: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .candles-row {
+            position: absolute;
+            bottom: 120px;
+            left: 55px;
+            width: 110px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .candle {
+            background: linear-gradient(to top, #ffe082, #ffb300);
+            width: 6px;
+            height: 30px;
+            border-radius: 3px 3px 0 0;
+            position: relative;
+        }
+        .flame {
+            background: radial-gradient(circle at bottom, #ffeb3b 20%, #ff5722 70%);
+            width: 10px;
+            height: 16px;
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -18px;
+            left: -2px;
+            box-shadow: 0 0 10px #ffeb3b, 0 0 20px #ff5722;
+            animation: flicker 0.15s ease-in-out infinite alternate;
+        }
+        .smoke {
+            display: none;
+            background: rgba(150, 150, 150, 0.4);
+            width: 4px;
+            height: 12px;
+            border-radius: 50%;
+            position: absolute;
+            top: -15px;
+            left: 1px;
+            animation: rise 1s ease-out forwards;
+        }
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-2deg); }
+            100% { transform: scale(1.1) rotate(2deg); }
+        }
+        @keyframes rise {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-25px) scale(2); opacity: 0; filter: blur(1px); }
+        }
+        .timer-text { font-size: 28px; font-weight: 600; color: #ff5722; margin-top: 15px; }
+
+        /* Slide 4: Beautiful Typewriter Shayari & Carousel */
+        .typing-container {
+            min-height: 130px;
+            font-size: 20px;
+            color: #4a148c;
+            font-family: 'Caveat', cursive;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            white-space: pre-line;
+        }
+        .memory-gallery {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 15px 5px;
+            max-width: 100%;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .memory-card {
+            flex: 0 0 260px;
+            background: white;
+            padding: 12px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+        .memory-card img { 
+            width: 100%; 
+            height: 220px;
+            object-fit: cover;
+            border-radius: 14px; 
+        }
+        .chibi-caption {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #d81b60;
+            font-weight: 600;
+            font-style: italic;
+            line-height: 1.3;
+        }
+        .memory-gallery::-webkit-scrollbar { display: none; } /* Clean, no ugly scrollbar */
+
+        /* Slide 5: Video Layout Setup */
+        .video-container { display: flex; gap: 20px; flex-direction: column; width: 100%; align-items: center;}
+        video { width: 100%; max-width: 300px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); outline: none; background: #000; }
+
+        /* Modern Gradient Action Buttons */
+        .next-btn {
+            margin-top: 25px;
+            padding: 12px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            background: linear-gradient(135deg, #d81b60, #ab47bc);
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
+            transition: all 0.3s;
+        }
+        .next-btn:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(216, 27, 96, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.96) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CSS Animated Floating Background Objects -->
+    <div class="decorations" id="balloon-container"></div>
+
+    <audio id="bg-music" loop>
+        <source src="bg-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Slide 1 -->
+    <div id="page1" class="page active-page">
+        <div class="envelope-wrapper">
+            <div class="envelope" onclick="goToPage(2); playMusic();">
+                <div class="envelope-text">For Subha ✨<br><span style="font-size:14px; opacity:0.8;">(Tap to open)</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div id="page2" class="page">
+        <div class="glass-card">
+            <div class="calendar-container">
+                <div class="calendar">
+                    <h2 style="margin-bottom:5px; font-size:24px;">June 2026</h2>
+                    <div class="grid">
+                        <div class="day-header">S</div><div class="day-header">M</div><div class="day-header">T</div><div class="day-header">W</div><div class="day-header">T</div><div class="day-header">F</div><div class="day-header">S</div>
+                        <div></div><div>1</div><div class="day highlight">2</div><div>3</div><div>4</div><div>5</div><div>6</div>
+                    </div>
+                </div>
+                <div class="calendar-photo">
+                    <img src="1000052056.jpg" alt="Memory Photo">
+                </div>
+            </div>
+            <h1 style="margin-top: 15px; font-size: 36px;">Happy Birthday Subha!</h1>
+            <button class="next-btn" onclick="goToPage(3)">Next ❤️</button>
+        </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div id="page3" class="page">
+        <div class="glass-card" style="width: 320px;">
+            <h1>Make a Wish! 🌟</h1>
+            
+            <div class="cake-container">
+                <div class="candles-row">
+                    <div class="candle"><div class="flame"></div><div class="smoke"></div></div>
+                    <div class="candle"><div class="flame"></div><div class="smoke"></div></div>
+                    <div class="candle"><div class="flame"></div><div class="smoke"></div></div>
+                    <div class="candle"><div class="flame"></div><div class="smoke"></div></div>
+                    <div class="candle"><div class="flame"></div><div class="smoke"></div></div>
+                </div>
+                <div class="cake-tier-top">
+                    <div class="frosting"></div>
+                </div>
+                <div class="cake-tier">
+                    <div class="frosting"></div>
+                </div>
+            </div>
+
+            <p class="timer-text" id="timer">5</p>
+            <p id="mic-instruction" style="display:none; font-size: 16px; margin-top:10px; font-weight: 600; color: #d81b60; padding: 0 10px;">Blow directly into your mic to blow out the candles! 🌬️</p>
+        </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div id="page4" class="page">
+        <div class="glass-card" style="width:100%; max-width:450px; padding: 20px 15px;">
+            <div class="typing-container" id="shayari-text"></div>
+            
+            <div class="memory-gallery">
+                <div class="memory-card">
+                    <img src="1000052056.jpg" alt="Memory 1">
+                    <p class="chibi-caption">"When you realize the entire birthday cake is yours! 😎🍰"</p>
+                </div>
+                <div class="memory-card">
+                    <img src="1000049919.jpg" alt="Memory 2">
+                    <p class="chibi-caption">"5-star hostel dining: Newspaper tablecloths & endless gossip! 🍜"</p>
+                </div>
+                <div class="memory-card">
+                    <img src="1000049963.jpg" alt="Memory 3">
+                    <p class="chibi-caption">"Squad goals: Looking cute while pretending we study. 🤓✨"</p>
+                </div>
+                <div class="memory-card">
+                    <img src="1000050183.jpg" alt="Memory 4">
+                    <p class="chibi-caption">"Gravity was working overtime on us this day. 😴🛏️"</p>
+                </div>
+                <div class="memory-card">
+                    <img src="1000050152.jpg" alt="Memory 5">
+                    <p class="chibi-caption">"Room meetings: 10% planning, 90% plotting! 🤫"</p>
+                </div>
+                <div class="memory-card">
+                    <img src="1000050123.jpg" alt="Memory 6">
+                    <p class="chibi-caption">"Winter Fashion Week: The Blanket Burrito Edition! 🌯❄️"</p>
+                </div>
+                <div class="memory-card">
+                    <img src="1000049951.jpg" alt="Memory 7">
+                    <p class="chibi-caption">"Food somehow always tastes better on the floor together! 🤤"</p>
+                </div>
+                <div class="memory-card">
+                    <img src="1000050293.jpg" alt="Memory 8">
+                    <p class="chibi-caption">"Hostel diaries: Surviving on madness, maggi, and memories! ✌️💖"</p>
+                </div>
+            </div>
+
+            <button class="next-btn" onclick="goToPage(5)">Next ➡️</button>
+        </div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div id="page5" class="page">
+        <div class="glass-card" style="width:100%; max-width:400px;">
+            <h1 style="font-size:36px; margin-bottom:15px;">Moments Together 🎥</h1>
+            <div class="video-container">
+                <video controls playsinline>
+                    <source src="video1.mp4" type="video/mp4">
+                </video>
+                <video controls playsinline>
+                    <source src="video2.mp4" type="video/mp4">
+                </video>
+            </div>
+            <button class="next-btn" onclick="goToPage(6)">Final Page 💖</button>
+        </div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div id="page6" class="page">
+        <div class="glass-card" style="padding: 40px 20px;">
+            <h1 style="font-size: 52px; line-height:1.2; margin-bottom:10px;">Thank You for being you!</h1>
+            <h2 style="font-size:32px;">Happy Birthday once again, Subha! ❤️</h2>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+
+        // Create Animated Background Balloons dynamically
+        const container = document.getElementById('balloon-container');
+        const colors = ['rgba(216,27,96,0.15)', 'rgba(171,71,188,0.15)', 'rgba(255,112,67,0.15)', 'rgba(66,165,245,0.15)'];
+        for (let i = 0; i < 15; i++) {
+            let balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.style.left = Math.random() * 100 + 'vw';
+            balloon.style.animationDelay = Math.random() * 8 + 's';
+            balloon.style.animationDuration = (Math.random() * 5 + 6) + 's';
+            balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+            balloon.style.width = Math.random() * 20 + 20 + 'px';
+            balloon.style.height = balloon.style.width * 1.3;
+            container.appendChild(balloon);
+        }
+
+        function goToPage(pageNumber) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
+            document.getElementById('page' + pageNumber).classList.add('active-page');
+            
+            if (pageNumber === 3) {
+                startCakeTimer();
+            }
+            if (pageNumber === 4) {
+                typeShayari();
+            }
+        }
+
+        function playMusic() {
+            document.getElementById('bg-music').play().catch(e => console.log("Audio play blocked"));
+        }
+
+        function startCakeTimer() {
+            let timeLeft = 5;
+            document.getElementById('timer').innerText = timeLeft;
+            document.getElementById('timer').style.display = 'block';
+            document.getElementById('mic-instruction').style.display = 'none';
+            
+            document.querySelectorAll('.flame').forEach(f => f.style.display = 'block');
+            document.querySelectorAll('.smoke').forEach(s => s.style.display = 'none');
+
+            let countdown = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    document.getElementById('timer').style.display = 'none';
+                    document.getElementById('mic-instruction').style.display = 'block';
+                    startMicrophoneListener();
+                }
+            }, 1000);
+        }
+
+        function startMicrophoneListener() {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(function(stream) {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const analyser = audioContext.createAnalyser();
+                    const microphone = audioContext.createMediaStreamSource(stream);
+                    microphone.connect(analyser);
+                    analyser.fftSize = 256;
+                    const bufferLength = analyser.frequencyBinCount;
+                    const dataArray = new Uint8Array(bufferLength);
+
+                    function checkAudioVolume() {
+                        analyser.getByteFrequencyData(dataArray);
+                        let sum = 0;
+                        for(let i = 0; i < bufferLength; i++) { sum += dataArray[i]; }
+                        let average = sum / bufferLength;
+
+                        if (average > 55) {
+                            blowOutCandle(stream);
+                        } else {
+                            requestAnimationFrame(checkAudioVolume);
+                        }
+                    }
+                    checkAudioVolume();
+                })
+                .catch(function(err) {
+                    document.getElementById('mic-instruction').innerHTML = "Mic access not found. <br><button onclick='blowOutCandle(null)' style='padding:10px 20px; margin-top:12px; cursor:pointer; background:linear-gradient(135deg, #d81b60, #ff4081); color:white; border:none; border-radius:20px; font-weight:600; box-shadow: 0 4px 10px rgba(0,0,0,0.1);'>Tap to Blow Candles 🎂</button>";
+                });
+        }
+
+        function blowOutCandle(stream) {
+            if(stream) {
+                stream.getTracks().forEach(track => track.stop());
+            }
+            
+            document.querySelectorAll('.flame').forEach(f => f.style.display = 'none');
+            document.querySelectorAll('.smoke').forEach(s => s.style.display = 'block');
+            document.getElementById('mic-instruction').innerHTML = "<span style='font-size:20px; font-weight:bold; color:#2e7d32;'>Yay! Happy Birthday Subha! 🎉</span>";
+            
+            setTimeout(() => {
+                goToPage(4);
+            }, 2200);
+        }
+
+        const shayari = "Phoolon ne amrit ka jaam bheja hai,\nTaaron ne gagan se salam bheja hai,\nKhushiyan bhari ho zindagi aapki,\nYahi dil se humne paigham bheja hai. \n\nHappy Birthday Subha! 💖";
+        let charIndex = 0;
+        let isTyping = false;
+        
+        function typeShayari() {
+            if (isTyping) return; 
+            isTyping = true;
+            charIndex = 0;
+            document.getElementById("shayari-text").innerHTML = "";
+            
+            function typeNext() {
+                if (charIndex < shayari.length) {
+                    let char = shayari.charAt(charIndex);
+                    if (char === '\n') {
+                        document.getElementById("shayari-text").innerHTML += "<br>";
+                    } else {
+                        document.getElementById("shayari-text").innerHTML += char;
+                    }
+                    charIndex++;
+                    setTimeout(typeNext, 50); 
+                } else {
+                    isTyping = false;
+                }
+            }
+            typeNext();
+        }
+    </script>
+</body>
+</html>
